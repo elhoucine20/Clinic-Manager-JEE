@@ -19,6 +19,10 @@
 <div class="w-full max-w-md bg-white rounded-xl shadow-md p-8">
     <h1 class="text-2xl font-bold text-gray-800 text-center mb-6">Connexion</h1>
 
+    <% if (request.getAttribute("error") != null) { %>
+    <p class="mb-4 rounded-lg bg-red-100 px-3 py-2 text-sm text-red-700">${error}</p>
+    <% }%>
+
     <form action="${pageContext.request.contextPath}/login" method="post" class="space-y-4">
 
         <div>
@@ -38,10 +42,8 @@
             Se connecter
         </button>
     </form>
-    <p class="text-sm text-gray-600 text-center mt-4">
-        Pas de compte ?
-        <a href="register.jsp" class="text-blue-600 hover:underline">S'inscrire</a>
-    </p>
+
+    <!-- <p class="text-sm text-gray-600 text-center mt-4">Pas de compte ?<a href="register.jsp" class="text-blue-600 hover:underline">S'inscrire</a></p>-->
 </div>
 
 </body>

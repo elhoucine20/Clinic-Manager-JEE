@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:17
+    container_name: clinic-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5434:5432"
+    volumes:
+      - clinic_pgdata:/var/lib/postgresql/data
+
+volumes:
+  clinic_pgdata:
+    name: clinic_pgdata
+    external: true

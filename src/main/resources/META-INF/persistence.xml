@@ -4,6 +4,19 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
              version="3.2">
     <persistence-unit name="default">
+        <class>com.tulisko.clinicmangaer.model.User</class>
+        <class>com.tulisko.clinicmangaer.model.Admin</class>
+        <class>com.tulisko.clinicmangaer.model.Patient</class>
+        <class>com.tulisko.clinicmangaer.model.Doctor</class>
+        <class>com.tulisko.clinicmangaer.model.Staff</class>
 
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5434/clinic_db"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+            <property name="jakarta.persistence.jdbc.password" value="12345678"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
     </persistence-unit>
 </persistence>
