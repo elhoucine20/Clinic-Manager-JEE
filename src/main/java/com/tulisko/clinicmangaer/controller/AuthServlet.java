@@ -14,20 +14,20 @@ public class AuthServlet extends HttpServlet {
     private String message;
 
     private UserService userService = new UserService();
-    public void init() {
-        message = "Votre inscrire ici !";
+    public void init() { // qaund le servlet est initialiser execute automatique
+        message = "inscrire ici !";
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if ("/login".equals(request.getServletPath())){
-            HttpSession session = request.getSession(false);
+        if ("/login".equals(request.getServletPath())){ // pour verifie laquelle des deux routes a ete demander
+            HttpSession session = request.getSession(false); // recuperer session if exist if not -> false => ne cree pas
             if (session != null){
-                session.invalidate();
+                session.invalidate();  // (fini session) remove tous les donnees que stocker en session
             }
-            response.sendRedirect(request.getContextPath()+"/login");
+            response.sendRedirect(request.getContextPath()+"/login"); // redirect vers login (new request)
             return;
         }
-        request.getRequestDispatcher("/auth/login.jsp").forward(request,response);
+        request.getRequestDispatcher("/auth/login.jsp").forward(request,response);  // la meme request vres login
     }
 
     @Override
@@ -39,21 +39,21 @@ public class AuthServlet extends HttpServlet {
         try {
             User user = userService.login(email,password);
             HttpSession oldSesion = request.getSession(false);
-            if (oldSesion != null){
-                oldSesion.invalidate();
+            if (oldSesion != null){   // if exist deja une session
+                oldSesion.invalidate(); // remove
             }
-            HttpSession session = request.getSession(true);
-            session.setAttribute("userId", user.getId());
+            HttpSession session = request.getSession(true); // create nouvelle sesssion
+            session.setAttribute("userId", user.getId()); // remplier session
             session.setAttribute("fullName", user.getFullName());
             session.setAttribute("role", user.getRole());
 
-            String base = request.getContextPath();
+            String laBase = request.getContextPath();
 
             switch (user.getRole()){
-                case ADMIN -> response.sendRedirect(base + "/admin/dashboard.jsp");
-                case DOCTOR -> response.sendRedirect(base + "/doctor/dashboard.jsp");
-                case PATIENT -> response.sendRedirect(base + "/patient/dashboard.jsp");
-                case STAFF -> response.sendRedirect(base + "/staff/dashboard.jsp");
+                case ADMIN -> response.sendRedirect(laBase + "/admin/dashboard.jsp");
+                case DOCTOR -> response.sendRedirect(laBase + "/doctor/dashboard.jsp");
+                case PATIENT -> response.sendRedirect(laBase + "/patient/dashboard.jsp");
+                case STAFF -> response.sendRedirect(laBase + "/staff/dashboard.jsp");
             }
         }catch (InvalidCredentialsException e){
             request.setAttribute("error",e.getMessage());

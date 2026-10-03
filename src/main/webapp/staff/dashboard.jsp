@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Médecin</title>
+    <title>Dashboard Staff</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="min-h-screen bg-gray-100">
@@ -28,27 +28,27 @@
 </header>
 
 <main class="max-w-5xl mx-auto px-4 py-8">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard Médecin</h2>
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard Staff</h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="rounded-xl bg-white p-6 shadow-sm">
-            <h3 class="font-semibold text-gray-800">Mon agenda</h3>
-            <p class="mt-1 text-sm text-gray-500">Consulter mon planning</p>
+            <h3 class="font-semibold text-gray-800">Planning</h3>
+            <p class="mt-1 text-sm text-gray-500">Voir le planning de la clinique</p>
             <span class="mt-3 inline-block rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-500">Bientôt</span>
         </div>
         <div class="rounded-xl bg-white p-6 shadow-sm">
-            <h3 class="font-semibold text-gray-800">Mes disponibilités</h3>
-            <p class="mt-1 text-sm text-gray-500">Gérer mes horaires et absences</p>
+            <h3 class="font-semibold text-gray-800">Rendez-vous</h3>
+            <p class="mt-1 text-sm text-gray-500">Gérer les rendez-vous</p>
             <span class="mt-3 inline-block rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-500">Bientôt</span>
         </div>
         <div class="rounded-xl bg-white p-6 shadow-sm">
-            <h3 class="font-semibold text-gray-800">Mes rendez-vous</h3>
-            <p class="mt-1 text-sm text-gray-500">Voir les rendez-vous de mes patients</p>
+            <h3 class="font-semibold text-gray-800">Replanification</h3>
+            <p class="mt-1 text-sm text-gray-500">Déplacer un rendez-vous</p>
             <span class="mt-3 inline-block rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-500">Bientôt</span>
         </div>
         <div class="rounded-xl bg-white p-6 shadow-sm">
-            <h3 class="font-semibold text-gray-800">Notes médicales</h3>
-            <p class="mt-1 text-sm text-gray-500">Créer et consulter les notes</p>
+            <h3 class="font-semibold text-gray-800">Liste d'attente</h3>
+            <p class="mt-1 text-sm text-gray-500">Patients en attente d'un créneau</p>
             <span class="mt-3 inline-block rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-500">Bientôt</span>
         </div>
     </div>

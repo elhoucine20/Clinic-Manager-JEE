@@ -1,12 +1,13 @@
 package com.tulisko.clinicmangaer.repository;
 
 import com.tulisko.clinicmangaer.model.User;
+import com.tulisko.clinicmangaer.repository.impl.ImplUserRepository;
 import com.tulisko.clinicmangaer.util.JpaUtil;
 import jakarta.persistence.EntityManager;
 
 import java.util.Optional;
 
-public class UserRepository {
+public class UserRepository implements ImplUserRepository {
 
 
     public void save(User user){
@@ -32,5 +33,9 @@ public class UserRepository {
         }finally {
             em.close();
         }
+    }
+
+    public boolean existByEmail(String email){
+        return findByEmail(email).isPresent();
     }
 }
