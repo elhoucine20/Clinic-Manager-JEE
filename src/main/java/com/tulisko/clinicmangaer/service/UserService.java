@@ -1,21 +1,22 @@
 package com.tulisko.clinicmangaer.service;
 
+import com.tulisko.clinicmangaer.dto.DoctorCreateDTO;
+import com.tulisko.clinicmangaer.dto.StaffCreateDTO;
 import com.tulisko.clinicmangaer.exception.DuplicateEmailException;
 import com.tulisko.clinicmangaer.exception.InvalidCredentialsException;
-import com.tulisko.clinicmangaer.model.Admin;
-import com.tulisko.clinicmangaer.model.User;
+import com.tulisko.clinicmangaer.model.*;
+import com.tulisko.clinicmangaer.repository.SpecialtyRepository;
 import com.tulisko.clinicmangaer.repository.UserRepository;
+import com.tulisko.clinicmangaer.repository.impl.ImplSpecialtyRepository;
+import com.tulisko.clinicmangaer.repository.impl.ImplUserRepository;
 import com.tulisko.clinicmangaer.util.PasswordUtil;
-import com.tulisko.clinicmangaer.model.Doctor;
-import com.tulisko.clinicmangaer.model.Patient;
-import com.tulisko.clinicmangaer.model.Staff;
 
 import java.util.UUID;
 
 public class UserService {
 
-    private UserRepository userRepository = new UserRepository();
-
+    private ImplUserRepository userRepository = new UserRepository();
+    private ImplSpecialtyRepository specialtyRepository = new SpecialtyRepository();
 
     public Admin createAdmin(String fullname,String email,String phone, String password){
         if (password == null || password.length() < 8){
@@ -53,25 +54,32 @@ public class UserService {
         return patient;
     }
 
-    public Doctor createDoctor(String fullName, String email, String phone, String password,
-                               String matricule, String titre) {
-        String normalizedEmail = checkAndNormalize(email, password);
-        String salt = PasswordUtil.generateSlat();
-        String hash = PasswordUtil.hashPassword(password, salt);
+    public Doctor createDoctor(DoctorCreateDTO dto) {
 
-        Doctor doctor = new Doctor(UUID.randomUUID(), fullName.trim(),
-                normalizedEmail, phone.trim(), hash, salt, matricule.trim(), titre.trim());
+        if (dto.getSpecialtyId() == null) {
+            throw new IllegalArgumentException("Choisissez une spécialité.");
+        }
+        Specialty specialty = specialtyRepository.findById(dto.getSpecialtyId())
+                .orElseThrow(() -> new IllegalArgumentException("Choisissez une specialite"));
+
+        String normalizedEmail = checkAndNormalize(dto.getEmail(), dto.getPassword());
+        String salt = PasswordUtil.generateSlat();
+        String hash = PasswordUtil.hashPassword(dto.getPassword(), salt);
+
+        Doctor doctor = new Doctor(UUID.randomUUID(), dto.getFullName().trim(),
+                normalizedEmail, dto.getTelephone().trim(), hash, salt, dto.getMatricule().trim(), dto.getTitre().trim());
+        doctor.setSpecialty(specialty);
         userRepository.save(doctor);
         return doctor;
     }
 
-    public Staff createStaff(String fullName, String email, String phone, String password) {
-        String normalizedEmail = checkAndNormalize(email, password);
+    public Staff createStaff(StaffCreateDTO dto) {
+        String normalizedEmail = checkAndNormalize(dto.getEmail(), dto.getPassword());
         String salt = PasswordUtil.generateSlat();
-        String hash = PasswordUtil.hashPassword(password, salt);
+        String hash = PasswordUtil.hashPassword(dto.getPassword(), salt);
 
-        Staff staff = new Staff(UUID.randomUUID(), fullName.trim(),
-                normalizedEmail, phone.trim(), hash, salt);
+        Staff staff = new Staff(UUID.randomUUID(), dto.getFullName().trim(),
+                normalizedEmail, dto.getTelephone().trim(), hash, salt);
         userRepository.save(staff);
         return staff;
     }

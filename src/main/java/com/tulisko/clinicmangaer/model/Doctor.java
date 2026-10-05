@@ -1,9 +1,7 @@
 package com.tulisko.clinicmangaer.model;
 
 import com.tulisko.clinicmangaer.model.enums.RoleUser;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -14,6 +12,9 @@ public class Doctor extends User {
     @Column(unique = true, nullable = false)
     private String matricule;
     private String titre;
+    @ManyToOne
+    @JoinColumn(name = "specialty_id")
+    private Specialty specialty;
 
     protected Doctor() {
     }
@@ -38,5 +39,13 @@ public class Doctor extends User {
 
     public void setTitre(String titre) {
         this.titre = titre;
+    }
+
+    public Specialty getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(Specialty specialty) {
+        this.specialty = specialty;
     }
 }

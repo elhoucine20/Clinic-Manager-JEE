@@ -9,6 +9,8 @@
         <class>com.tulisko.clinicmangaer.model.Patient</class>
         <class>com.tulisko.clinicmangaer.model.Doctor</class>
         <class>com.tulisko.clinicmangaer.model.Staff</class>
+        <class>com.tulisko.clinicmangaer.model.Department</class>
+        <class>com.tulisko.clinicmangaer.model.Specialty</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>

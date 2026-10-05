@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -22,13 +23,17 @@
     <aside class="hidden md:flex w-64 flex-col bg-slate-900 text-slate-300">
         <div class="px-6 py-5 text-xl font-bold text-white border-b border-slate-800">ClinicManager</div>
         <nav class="flex-1 px-3 py-4 space-y-1 text-sm">
-            <a href="${pageContext.request.contextPath}/admin/dashboard.jsp"
+            <a href="${pageContext.request.contextPath}/WEB-INF/views/admin/dashboard"
                class="flex items-center rounded-lg bg-slate-800 px-3 py-2 font-medium text-white">Dashboard</a>
             <span class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-500">Médecins <em class="text-xs not-italic">Bientôt</em></span>
             <span class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-500">Staff <em class="text-xs not-italic">Bientôt</em></span>
-            <span class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-500">Patients <em class="text-xs not-italic">Bientôt</em></span>
-            <span class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-500">Spécialités <em class="text-xs not-italic">Bientôt</em></span>
-            <span class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-500">Départements <em class="text-xs not-italic">Bientôt</em></span>
+           <span class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-500">Patients <em class="text-xs not-italic">Bientôt</em></span>
+            <!-- <span class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-500">Spécialités <em class="text-xs not-italic">Bientôt</em></span>
+                        <span class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-500">Départements <em class="text-xs not-italic">Bientôt</em></span>
+            -->
+            <a href="${pageContext.request.contextPath}/admin/catalog"
+               class="flex items-center rounded-lg px-3 py-2 hover:bg-slate-800 hover:text-white">Départements et spécialités</a>
+
             <span class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-500">Utilisateurs <em class="text-xs not-italic">Bientôt</em></span>
         </nav>
     </aside>
@@ -85,7 +90,7 @@
         <p class="mb-4 rounded-lg bg-red-100 px-3 py-2 text-sm text-red-700">${error}</p>
         <% } %>
 
-        <form action="${pageContext.request.contextPath}/admin/users" method="post" class="space-y-4">
+        <form action="${pageContext.request.contextPath}/admin/dashboard" method="post" class="space-y-4">
 
             <div>
                 <label for="role" class="mb-1 block text-sm font-medium text-slate-700">Rôle</label>
@@ -132,6 +137,27 @@
                     <input type="text" id="titre" name="titre" placeholder="Dr, Pr..." required
                            class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
+
+                <div class="sm:col-span-2">
+                    <label for="specialtyId" class="mb-1 block text-sm font-medium text-slate-700">Spécialité</label>
+                    <c:choose>
+                        <c:when test="${empty specialties}">
+                            <p class="rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">
+                                Aucune spécialité n'existe.
+                                <a href="${pageContext.request.contextPath}/admin/catalog" class="font-semibold underline">Créez-en une d'abord</a>.
+                            </p>
+                        </c:when>
+                        <c:otherwise>
+                            <select id="specialtyId" name="specialtyId" required
+                                    class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Choisir une spécialité</option>
+                                <c:forEach items="${specialties}" var="s">
+                                    <option value="${s.id}"><c:out value="${s.name}"/> (<c:out value="${s.departmentName}"/>)</option>
+                                </c:forEach>
+                            </select>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </div>
 
             <div class="flex justify-end gap-3 pt-2">
@@ -148,7 +174,7 @@
     const dialog = document.getElementById('addUserDialog');
     const roleSelect = document.getElementById('role');
     const doctorFields = document.getElementById('doctorFields');
-    const doctorInputs = doctorFields.querySelectorAll('input');
+    const doctorInputs = doctorFields.querySelectorAll('input, select');
 
     function toggleDoctorFields() {
         const isDoctor = roleSelect.value === 'DOCTOR';
