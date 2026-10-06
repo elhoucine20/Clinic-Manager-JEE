@@ -1,14 +1,17 @@
 package com.tulisko.clinicmangaer.controller;
 
 import com.tulisko.clinicmangaer.service.UserService;
+import jakarta.persistence.PersistenceException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.tulisko.clinicmangaer.mapper.doctorMappers.DoctorMapper;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @WebServlet("/admin/doctors")
 public class AdminDoctorsServlet extends HttpServlet {

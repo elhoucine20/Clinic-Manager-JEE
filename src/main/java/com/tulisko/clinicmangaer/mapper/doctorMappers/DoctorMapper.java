@@ -13,7 +13,7 @@ public class DoctorMapper {
 
     public static DoctorDTO toDTO(Doctor doctor) {
         Specialty specialty = doctor.getSpecialty();
-        String specialtyName = specialty == null ? "—" : specialty.getName();
+        String specialtyName = specialty == null ? "public" : specialty.getName();
         String departmentName = specialty == null ? "—" : specialty.getDepartment().getName();
 
         return new DoctorDTO(doctor.getId(), doctor.getFullName(), doctor.getEmail(), doctor.getTelephone(),

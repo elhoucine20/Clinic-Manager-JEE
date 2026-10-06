@@ -9,6 +9,7 @@ import jakarta.persistence.EntityManager;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class UserRepository implements ImplUserRepository {
 
@@ -61,4 +62,35 @@ public class UserRepository implements ImplUserRepository {
             em.close();
         }
     }
+
+    @Override
+    public List<User> findAll() {
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            return em.createQuery("SELECT u FROM User u ORDER BY u.fullName", User.class).getResultList();
+        }finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public void updateActive(UUID id, boolean active) {
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            em.getTransaction().begin();
+            User user = em.find(User.class,id);
+            if (user == null) throw new IllegalArgumentException("utilisateur introuvable !!");
+            user.setActive(active);
+            em.getTransaction().commit();
+
+
+        }catch (RuntimeException e){
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw e;
+        }finally {
+            em.close();
+        }
+    }
+
+
 }

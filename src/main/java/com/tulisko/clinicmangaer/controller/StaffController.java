@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = "/staff")
+//@WebServlet(urlPatterns = "/staff")
 public class StaffController extends HttpServlet{
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)throws IOException {

@@ -16,6 +16,6 @@
     <span class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-500">Patients <em class="text-xs not-italic">Bientôt</em></span>
     <a href="${pageContext.request.contextPath}/admin/catalog"
        class="flex items-center rounded-lg px-3 py-2 ${activePage == 'catalog' ? 'bg-slate-800 font-medium text-white' : 'hover:bg-slate-800 hover:text-white'}">Départements et spécialités</a>
-    <span class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-500">Utilisateurs <em class="text-xs not-italic">Bientôt</em></span>
-  </nav>
+    <a href="${pageContext.request.contextPath}/admin/users"
+       class="flex items-center rounded-lg px-3 py-2 ${activePage == 'users' ? 'bg-slate-800 font-medium text-white' : 'hover:bg-slate-800 hover:text-white'}">Utilisateurs</a>  </nav>
 </aside>

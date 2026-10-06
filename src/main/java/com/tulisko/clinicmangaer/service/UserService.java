@@ -14,7 +14,7 @@ import com.tulisko.clinicmangaer.util.PasswordUtil;
 import java.util.List;
 import java.util.UUID;
 
-public class UserService {
+public class UserService{
 
     private ImplUserRepository userRepository = new UserRepository();
     private ImplSpecialtyRepository specialtyRepository = new SpecialtyRepository();
@@ -102,5 +102,16 @@ public class UserService {
     }
     public List<Staff> findAllStaff() {
         return userRepository.findAllStaff();
+    }
+
+    public List<User> findAllUsers(){
+        return userRepository.findAll();
+    }
+
+    public void setActive(UUID targetId,boolean active,UUID currentId){
+        if (!active && targetId.equals(currentId)){
+            throw new IllegalArgumentException("Vous ne pouvez pas desactiver votre propre compte");
+        }
+        userRepository.updateActive(targetId,active);
     }
 }
