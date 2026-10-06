@@ -1,4 +1,4 @@
-package com.tulisko.clinicmangaer.dto;
+package com.tulisko.clinicmangaer.dto.specialityDTOs;
 
 import java.util.UUID;
 

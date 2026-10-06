@@ -19,15 +19,8 @@
 
 <div class="flex min-h-screen">
 
-  <aside class="hidden md:flex w-64 flex-col bg-slate-900 text-slate-300">
-    <div class="px-6 py-5 text-xl font-bold text-white border-b border-slate-800">ClinicManager</div>
-    <nav class="flex-1 px-3 py-4 space-y-1 text-sm">
-      <a href="${pageContext.request.contextPath}/admin/dashboard"
-         class="flex items-center rounded-lg px-3 py-2 hover:bg-slate-800 hover:text-white">Dashboard</a>
-      <a href="${pageContext.request.contextPath}/admin/catalog"
-         class="flex items-center rounded-lg bg-slate-800 px-3 py-2 font-medium text-white">Départements et spécialités</a>
-    </nav>
-  </aside>
+  <c:set var="activePage" value="catalog"/>
+  <%@ include file="/WEB-INF/fragments/admin-sidebar.jspf" %>
 
   <div class="flex flex-1 flex-col">
 

@@ -48,14 +48,16 @@ public class AuthServlet extends HttpServlet{
             session.setAttribute("fullName", user.getFullName());
             session.setAttribute("role", user.getRole());
 
-            String laBase = request.getContextPath();
+                String laBase = request.getContextPath();
 
-            switch (user.getRole()){  // rediger vers une direction selon role
-                case ADMIN -> response.sendRedirect(laBase + "/admin/dashboard");
+           /* switch (user.getRole()){  // rediger vers une direction selon role
+                case ADMIN -> response.sendRedirect(laBase + "/admin/dashboard.jsp");
                 case DOCTOR -> response.sendRedirect(laBase + "/doctor/dashboard.jsp");
                 case PATIENT -> response.sendRedirect(laBase + "/patient/dashboard.jsp");
                 case STAFF -> response.sendRedirect(laBase + "/staff/dashboard.jsp");
             }
+            */
+            response.sendRedirect(laBase+"/"+user.getRole().name().toLowerCase()+"/dashboard.jsp");
         }catch (InvalidCredentialsException e){
             request.setAttribute("error",e.getMessage());
             request.getRequestDispatcher("/auth/login.jsp").forward(request,response);

@@ -1,7 +1,7 @@
 package com.tulisko.clinicmangaer.service;
 
-import com.tulisko.clinicmangaer.dto.DoctorCreateDTO;
-import com.tulisko.clinicmangaer.dto.StaffCreateDTO;
+import com.tulisko.clinicmangaer.dto.doctorDTOs.DoctorCreateDTO;
+import com.tulisko.clinicmangaer.dto.staffDTOs.StaffCreateDTO;
 import com.tulisko.clinicmangaer.exception.DuplicateEmailException;
 import com.tulisko.clinicmangaer.exception.InvalidCredentialsException;
 import com.tulisko.clinicmangaer.model.*;
@@ -11,6 +11,7 @@ import com.tulisko.clinicmangaer.repository.impl.ImplSpecialtyRepository;
 import com.tulisko.clinicmangaer.repository.impl.ImplUserRepository;
 import com.tulisko.clinicmangaer.util.PasswordUtil;
 
+import java.util.List;
 import java.util.UUID;
 
 public class UserService {
@@ -93,5 +94,13 @@ public class UserService {
             throw new DuplicateEmailException(normalizedEmail);
         }
         return normalizedEmail;
+    }
+
+
+    public List<Doctor> findAllDoctors() {
+        return userRepository.findAllDoctors();
+    }
+    public List<Staff> findAllStaff() {
+        return userRepository.findAllStaff();
     }
 }

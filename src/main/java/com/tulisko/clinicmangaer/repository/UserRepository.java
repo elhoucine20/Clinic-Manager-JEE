@@ -1,10 +1,13 @@
 package com.tulisko.clinicmangaer.repository;
 
+import com.tulisko.clinicmangaer.model.Doctor;
+import com.tulisko.clinicmangaer.model.Staff;
 import com.tulisko.clinicmangaer.model.User;
 import com.tulisko.clinicmangaer.repository.impl.ImplUserRepository;
 import com.tulisko.clinicmangaer.util.JpaUtil;
 import jakarta.persistence.EntityManager;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserRepository implements ImplUserRepository {
@@ -37,5 +40,25 @@ public class UserRepository implements ImplUserRepository {
 
     public boolean existByEmail(String email){
         return findByEmail(email).isPresent();
+    }
+
+    public List<Doctor> findAllDoctors(){
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            return em.createQuery("SELECT d FROM Doctor d ORDER BY d.fullName", Doctor.class)
+                    .getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Staff> findAllStaff(){
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            return em.createQuery("SELECT s FROM Staff s ORDER BY s.fullName", Staff.class)
+                    .getResultList();
+        } finally {
+            em.close();
+        }
     }
 }

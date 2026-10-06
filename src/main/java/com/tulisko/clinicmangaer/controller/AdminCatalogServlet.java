@@ -1,7 +1,7 @@
 package com.tulisko.clinicmangaer.controller;
 
-import com.tulisko.clinicmangaer.mapper.DepartmentMapper;
-import com.tulisko.clinicmangaer.mapper.SpecialtyMapper;
+import com.tulisko.clinicmangaer.mapper.depertmentMappers.DepartmentMapper;
+import com.tulisko.clinicmangaer.mapper.specialityMappers.SpecialtyMapper;
 import com.tulisko.clinicmangaer.service.DepartmentService;
 import com.tulisko.clinicmangaer.service.SpecialtyService;
 import jakarta.persistence.PersistenceException;

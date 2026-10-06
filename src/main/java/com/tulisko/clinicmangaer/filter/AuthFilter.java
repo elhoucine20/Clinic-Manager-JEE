@@ -12,12 +12,6 @@ import java.io.IOException;
 @WebFilter(urlPatterns = {"/admin/*", "/doctor/*", "/patient/*", "/staff/*"})
 public class AuthFilter implements Filter{
 
-
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        Filter.super.init(filterConfig);
-    }
-
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
@@ -28,27 +22,18 @@ public class AuthFilter implements Filter{
             response.sendRedirect(request.getContextPath()+"/login");
             return;
         }
-        RoleUser required = requiredRole(request.getServletPath());
-        if (required == null || role != required){
+        String path = request.getServletPath() ;
+        String expected = "/"+role.name().toLowerCase()+"/";
+
+        if (path.startsWith(expected)) {
+            response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate"); // c'est le principale
+              //  no-store-> sans copier page, no-cache-> if une copier chaque fois verifier filter , must-revalidate->if copier vieux doit verifier avant sorite de copier
+            response.setHeader("Pragma", "no-cache");  // la ,meme chose avec une autre manier (langage vieux)
+            response.setDateHeader("Expires", 0);  // la page est exprimer donc doit recuperer une nouveux copier
+            chain.doFilter(request, response);
+        } else {
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
-            return;
         }
-        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
-        response.setHeader("Pragma", "no-cache");
-        response.setDateHeader("Expires", 0);
-        chain.doFilter(request,response);
     }
 
-    private RoleUser requiredRole(String path){
-        if (path.startsWith("/admin/")) return RoleUser.ADMIN;
-        if (path.startsWith("/doctor/")) return RoleUser.DOCTOR;
-        if (path.startsWith("/patient/")) return RoleUser.PATIENT;
-        if (path.startsWith("/staff/")) return RoleUser.STAFF;
-        return null;
-    }
-
-    @Override
-    public void destroy() {
-        Filter.super.destroy();
-    }
 }

@@ -1,6 +1,6 @@
-package com.tulisko.clinicmangaer.mapper;
+package com.tulisko.clinicmangaer.mapper.specialityMappers;
 
-import com.tulisko.clinicmangaer.dto.SpecialtyDTO;
+import com.tulisko.clinicmangaer.dto.specialityDTOs.SpecialtyDTO;
 import com.tulisko.clinicmangaer.model.Specialty;
 
 import java.util.List;

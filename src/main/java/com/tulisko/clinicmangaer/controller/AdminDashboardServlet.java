@@ -1,9 +1,9 @@
 package com.tulisko.clinicmangaer.controller;
 
-import com.tulisko.clinicmangaer.dto.DoctorCreateDTO;
-import com.tulisko.clinicmangaer.dto.StaffCreateDTO;
+import com.tulisko.clinicmangaer.dto.doctorDTOs.DoctorCreateDTO;
+import com.tulisko.clinicmangaer.dto.staffDTOs.StaffCreateDTO;
 import com.tulisko.clinicmangaer.exception.DuplicateEmailException;
-import com.tulisko.clinicmangaer.mapper.SpecialtyMapper;
+import com.tulisko.clinicmangaer.mapper.specialityMappers.SpecialtyMapper;
 import com.tulisko.clinicmangaer.service.SpecialtyService;
 import com.tulisko.clinicmangaer.service.UserService;
 import jakarta.persistence.PersistenceException;
