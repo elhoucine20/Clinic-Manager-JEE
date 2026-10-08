@@ -11,6 +11,10 @@
     <a href="${pageContext.request.contextPath}/doctor/availabilities"
        class="flex items-center rounded-lg px-3 py-2 ${activePage == 'availabilities' ? 'bg-slate-800 font-medium text-white' : 'hover:bg-slate-800 hover:text-white'}">Mes disponibilités</a>
 
+    <a href="${pageContext.request.contextPath}/doctor/absences"
+       class="flex items-center rounded-lg px-3 py-2 ${activePage == 'absences' ? 'bg-slate-800 font-medium text-white' : 'hover:bg-slate-800 hover:text-white'}">Mes absences</a>
+
+
     <span class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-500">Mes rendez-vous <em class="text-xs not-italic">Bientôt</em></span>
     <span class="flex items-center justify-between rounded-lg px-3 py-2 text-slate-500">Notes médicales <em class="text-xs not-italic">Bientôt</em></span>
   </nav>
