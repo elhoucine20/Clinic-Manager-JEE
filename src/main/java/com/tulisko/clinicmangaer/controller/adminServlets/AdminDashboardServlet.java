@@ -1,4 +1,4 @@
-package com.tulisko.clinicmangaer.controller;
+package com.tulisko.clinicmangaer.controller.adminServlets;
 
 import com.tulisko.clinicmangaer.dto.doctorDTOs.DoctorCreateDTO;
 import com.tulisko.clinicmangaer.dto.staffDTOs.StaffCreateDTO;

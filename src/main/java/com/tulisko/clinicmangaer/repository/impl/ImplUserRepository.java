@@ -16,4 +16,5 @@ public interface ImplUserRepository {
     public List<Staff> findAllStaff();
     public List<User> findAll();
     public void updateActive(UUID id, boolean active);
-    }
+    public Optional<Doctor> findDoctorById(UUID id);
+}

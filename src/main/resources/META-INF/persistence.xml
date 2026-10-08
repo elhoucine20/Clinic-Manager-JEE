@@ -11,6 +11,8 @@
         <class>com.tulisko.clinicmangaer.model.Staff</class>
         <class>com.tulisko.clinicmangaer.model.Department</class>
         <class>com.tulisko.clinicmangaer.model.Specialty</class>
+        <class>com.tulisko.clinicmangaer.model.Availability</class>
+        <class>com.tulisko.clinicmangaer.model.Absence</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>

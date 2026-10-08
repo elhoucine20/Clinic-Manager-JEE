@@ -1,4 +1,4 @@
-package com.tulisko.clinicmangaer.controller;
+package com.tulisko.clinicmangaer.controller.adminServlets;
 
 import com.tulisko.clinicmangaer.mapper.depertmentMappers.DepartmentMapper;
 import com.tulisko.clinicmangaer.mapper.specialityMappers.SpecialtyMapper;

@@ -92,5 +92,13 @@ public class UserRepository implements ImplUserRepository {
         }
     }
 
+    public Optional<Doctor> findDoctorById(UUID id){
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            return Optional.ofNullable(em.find(Doctor.class,id));
+        }finally {
+            em.close();
+        }
+    }
 
 }
